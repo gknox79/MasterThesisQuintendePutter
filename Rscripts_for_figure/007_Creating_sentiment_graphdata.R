@@ -9,8 +9,6 @@ library(tidyverse)
 Data <- read_csv("Movie_data_descriptive/Cleaned_017_ArmyoftheDead.csv")
 view(Data)
 
-#--- Testing out possible ways to measure sentiment in a way....
-
 test <- 
   Data %>% 
   group_by(newvar) %>% 
@@ -24,11 +22,6 @@ duplicated(testtest)
  
 #getting rid of dupes 
 testtest <- testtest[!duplicated(testtest),]
-
-                                                   
-
-# so the plan is to merge all the data from movies together -->  works for bigger files, so just need to 
-
 
 # ---- Merging all the data from the movie descriptive doc.
 
