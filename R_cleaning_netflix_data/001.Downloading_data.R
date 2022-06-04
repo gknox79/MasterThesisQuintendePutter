@@ -1,4 +1,4 @@
-#Data Cleaning Document --> Retrieve data first --> Add in Dates --> further cleaning --> use dPrep course on creating proper files
+#Data Cleaning Document --> Retrieve data first 
 
 #--- Load Libraries ---# 
 library(readr)
@@ -33,4 +33,4 @@ cat('I am done')
 sink()
 
 # data stored in data folder
-#data all downloaded from drive in case there are issues with my pc 
+

@@ -9,7 +9,7 @@ Netflix_data_cleaned <- read.csv('cleaned_data/Cleaned_data_Netflix.csv')
 
 head(IMDB_Data)
 
-# correcting all the titles in the data set that are not correctly speleld 
+# correcting all the titles in the data set that are not correctly spelled
 
 #A california christmas
 IMDB_Data %>% filter(primaryTitle == "A California Christmas: City Lights")
@@ -225,4 +225,4 @@ Netflix_data_cleaned$Title[which(Netflix_data_cleaned$Title == "Workinâ Mom
 IMDB_Data %>% filter(primaryTitle == "WWII in Color: Road to Victory")
 Netflix_data_cleaned$Title[which(Netflix_data_cleaned$Title == "Workinâ Moms")] <- "Workin' Moms"
 
-write.csv(Netflix_data_cleaned, "fixed_names_data_Netflix.csv", row.names = FALSE) # clean file in spare time 
+write.csv(Netflix_data_cleaned, "fixed_names_data_Netflix.csv", row.names = FALSE) 

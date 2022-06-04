@@ -96,4 +96,3 @@ dir.create(("cleaned_data"), showWarnings = FALSE)
 # weird that it is not creating it in the correct folder, need to fix this later 
 write.csv(Complete_Data, "Complete_data_Netflix.csv", row.names = FALSE)
 
-getwd()

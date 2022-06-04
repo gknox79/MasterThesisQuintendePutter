@@ -1,5 +1,4 @@
 # filter out the important variables from imdb, combine movies and series. 
-# keep this file as way for how test file later used was constructed --> if publishing i need to clean and explain this better .
 
 #filter IMDB variables
 cols_to_keep = c('titleType', 'primaryTitle', 'originalTitle', 'startYear', 'genres')

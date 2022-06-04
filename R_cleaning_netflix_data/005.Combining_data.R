@@ -12,17 +12,12 @@ getwd()
 Complete_Data <- read.csv('cleaned_data/fixed_names_data_Netflix.csv')
 
 # get review dataset
-# try to get this dataset and combine it with original genre doc --> same coding to select the lists --> might work out very well
-
 
 genre_data <- as.data.frame(fread("data/data-6.tsv"))
 review_data<-as.data.frame(fread("data/review_data.tsv"))
 
 head(genre_data)
 head(review_data)
-
-
-# deze twee binden aan elkaar --> columns to keep doen erachter --> daarna is kijken wat er over blijft
 
 #--- Binding the two datasets ---# 
 
@@ -65,10 +60,8 @@ view(test_data)
 ?left_join
 Data_complete <- left_join(test_data, Combined_data)
 rm(Combined_data, Complete_Data, Genres_review_data, IMDb_data, test, test_data)
-# data complete correct for here, dummy and all will be done later if needed for analysis
-# --- experiment to try and split the sets fas done before ------# ---> not working 
 
-#--- Fill in missing values ---# ---> get rid of those with with NA values --> not gonna need those 
+
 
 view(Data_complete)
 Data_complete %>% count(is.na(titleType)) # 15 rows with NA values 
@@ -82,8 +75,6 @@ Data_complete <- Data_complete[complete.cases(Data_complete), ]
 # --- Add +1 to total time as now it has zero's --- # 
 
 Data_complete$total_time_top10 <- Data_complete$total_time_top10 + 1
-
-# days to keep is when something was first in the top ten till its highest rank  --> other classifications harder because of series 
 
 # --- Deleting columns that are not needed anymore 
 

@@ -15,12 +15,12 @@ Complete_Data <- read.csv('cleaned_data/Complete_data_Netflix.csv')
 view(Complete_Data)
 
 #--- Creating one row per movie/observation
-Complete_Data2 <- Complete_Data %>% group_by(Title) %>% summarize(Firstday_2021 = min(Top10_date), # need to add another variable --> Sequel 
+Complete_Data2 <- Complete_Data %>% group_by(Title) %>% summarize(Firstday_2021 = min(Top10_date), 
                                                         Lastday_2021 = max(Top10_date),
                                                         Lowest_Rank = max(Rank),
                                                         Highest_Rank = min(Rank),
                                                         Days_in_Top = max(`Days.InTop.10`), 
-                                                        min_days_Top10 = min(Days.InTop.10),# need to add another variable --> continues previous season
+                                                        min_days_Top10 = min(Days.InTop.10),# need to add another variable uses numbers from previous seasons here
                                                         Viewer_Score = max(`Viewer.shipScore`), 
                                                         Netflix_release = min(NetflixReleaseDate),
                                                         NetflixExcl = min(NetflixExcl.),
@@ -46,14 +46,14 @@ Complete_Data2$Sequel[which(Complete_Data2$Title == 'Single All the Way')] <- 0
 Complete_Data2$Sequel[which(Complete_Data2$Title == 'The Christmas Chronicles')] <- 0
 
 # corrected 
-Complete_Data2 %>% filter(Title == 'The Christmas Chronicles 2') # method looks to be working here as well 
+Complete_Data2 %>% filter(Title == 'The Christmas Chronicles 2') 
 view(Complete_Data2)
 
 #-- still not correct, only partially filtered out all sequals --> those with first seasons before tracking top ten are not correctly listed here
 
-# all the productions in the sequal_ series must have sequel value --. 
+# all the productions in the sequal_ series must have sequel value
 view(test)
-test$sequel[test$Netflix_release < '2021-01-01' & test$Movie == '0'] <- 1 # run later
+test$sequel[test$Netflix_release < '2021-01-01' & test$Movie == '0'] <- 1 
 Complete_Data2 %>% filter(Movie == '1', Sequel == '1')
 # do this for Complete_data
 Complete_Data2$Sequel[Complete_Data2$Netflix_release < '2021-01-01' & Complete_Data2$Movie == '0'] <- 1
@@ -68,8 +68,8 @@ Complete_Data2 %>% filter(Title == 'Hop')
 Complete_Data2$Sequel[which(Complete_Data2$Title == 'The Secret Life of Pets 2')] <- 1
 Complete_Data2[270,]$Sequel <- 1 #title selection to hard
 Complete_Data2$Sequel[which(Complete_Data2$Title == 'The Twilight Saga: Eclipse')] <- 1
-Complete_Data2$Sequel[which(Complete_Data2$Title == 'The Twilight Saga: New Moon')] <- 1 # working for Twilight
-Complete_Data2$Sequel[which(Complete_Data2$Title == 'A Haunted House 2')] <- 1  # continue from here
+Complete_Data2$Sequel[which(Complete_Data2$Title == 'The Twilight Saga: New Moon')] <- 1 
+Complete_Data2$Sequel[which(Complete_Data2$Title == 'A Haunted House 2')] <- 1  
 Complete_Data2$Sequel[which(Complete_Data2$Title == 'American Pie: Reunion')] <- 1
 Complete_Data2$Sequel[which(Complete_Data2$Title == 'Animals on the Loose: A You…')] <- 1
 Complete_Data2$Sequel[which(Complete_Data2$Title == 'Army of Thieves')] <- 1
@@ -94,12 +94,12 @@ Complete_Data2$Sequel[which(Complete_Data2$Title == "To All the Boys Always and 
 Complete_Data2$Sequel[which(Complete_Data2$Title == "Trollhunters: Rise of the T…")] <- 1
 Complete_Data2$Sequel[which(Complete_Data2$Title == "Trollhunters: Rise of the T…")] <- 1
 
-# this should be all
 view(Complete_Data2)
+
 #-- Next step -- getting days 2 highest rank & new viewership score
 
 #--- Gettign days to highest rank
-Complete_Data2 %>% filter(Netflix_release < '2021-01-01') #64 rows which is quite a lot and so can't do this. 
+Complete_Data2 %>% filter(Netflix_release < '2021-01-01') 
 
 #- get date for highest rank testing first in original dataset 
 Complete_Data %>% group_by(Title) %>% filter(min(Rank))
@@ -107,15 +107,13 @@ Complete_Data %>% group_by(Title) %>% summarise()
 
 test = Complete_Data
 Complete_Data %>% group_by(Title) %>% which.min(Rank = min(Rank))
-?which.min
+
 min(test$Rank)
 view(test)
 
-#stack overflow attempts 
-Complete_Data %>% group_by(Title) %>% top_n(-1, Rank) # seems like one way... --> filters out most 
 
 # Other Solutions 
-Complete_Data %>% group_by(Title) %>% slice(which.min(Rank)) # this seems to work 
+Complete_Data %>% group_by(Title) %>% slice(which.min(Rank)) 
 # make a dataset --> merge them so that this is fixed
 Time_2_Top_data <- Complete_Data %>% group_by(Title) %>% slice(which.min(Rank))
 cols_to_keep = c('Title', 'Top10_date')
@@ -126,8 +124,9 @@ Complete_Data2 <- left_join(Complete_Data2, Time_2_Top_data, by = "Title")
 view(Complete_Data2)
 
 Complete_Data2$Top10_date - Complete_Data2$Firstday_2021
-# making days2top column and store the variables in there.. get rid of the older columns --> see what other columns can i get rid of. 
-# get to make a base dataset --> might need more for some calculations, but problem for later
+# making days2top column and store the variables in there.
+
+
 Complete_Data2$Firstday_2021 <- as.Date(Complete_Data2$Firstday_2021)
 Complete_Data2$Top10_date <- as.Date(Complete_Data2$Top10_date)
 
@@ -153,13 +152,13 @@ Complete_Data2<- left_join(Complete_Data2, Debut_data, by = "Title")
 view(Complete_Data2)
 
 # Viewership score development 
-## first develop score based on Complete_data ---> create a sum and than it should be fine
+
 breaks <- c(seq(1,11))
 
 seq(10,1)
 breaks
 
-Complete_Data$Score <- as.numeric(cut(-Complete_Data$Rank, breaks = -breaks, right = TRUE)) # Works as a charm.
+Complete_Data$Score <- as.numeric(cut(-Complete_Data$Rank, breaks = -breaks, right = TRUE)) 
 view(Complete_Data)
 ?cut
 Score_data <- Complete_Data %>% group_by(Title) %>% summarize(Viewerscore = sum(Score))
