@@ -22,7 +22,6 @@ summary(model1)
 
 model2 <- 
   lm(log(Time_in_Top10) ~ 
-
        NetflixExcl + 
        Movie + 
        Sequel +

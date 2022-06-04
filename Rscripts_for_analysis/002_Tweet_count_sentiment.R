@@ -1,4 +1,4 @@
-# combining twitter data files with main file
+# combining twitter data files with main file did this manual, probably can loop this. 
 
 library(tidyverse)
 library(dplyr)
@@ -45,8 +45,8 @@ write.csv(Total_data, "Twitter_api_data_test.csv", row.names = FALSE)
 Total_data$Pre_release_sentiment <- round(Total_data$Pre_release_sentiment, 2)
 Total_data$Post_release_sentiment <- round(Total_data$Post_release_sentiment, 2)
 write.csv(Total_data, "Twitter_api_data_test.csv", row.names = FALSE)
-#Total_data <- Total_data[-c(299),]
-#?write.csv
+
+
 
 
 

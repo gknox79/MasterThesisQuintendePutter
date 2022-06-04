@@ -16,13 +16,12 @@ typeof(Twitter_data$Title)
 
 
 ###### ======= Join datasets together ======= ######
-## change twilight names to correct ones --> merge nog working because of that twilight, this is a robbery !! fix this issue here
-#changing columns
+## change twilight names to correct ones 
 
 Twitter_data$Title[which(Twitter_data[137, ])] <- "The Twilight Saga: Eclipse"
 
 view(Twitter_data)
-Complete_dataset<- left_join(Netflix_data, Twitter_data, by = "Title") # looks good for now.
+Complete_dataset<- left_join(Netflix_data, Twitter_data, by = "Title")
 view(Complete_dataset)
 
 ###### ======= Get rid of column and make genre into seperate columns  ======= ######

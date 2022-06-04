@@ -2,7 +2,7 @@
 
 # ----Load in Data ----#
 Total_data <- 
-  read_csv("Dataforanalysis.csv")# this is the dataset with the 5 observations of censoring removed. 
+  read_csv("Dataforanalysis.csv")
 
 # ---Time in top ten correction ---#
 Total_data$Time_in_Top10<- Total_data$Time_in_Top10 + 1 

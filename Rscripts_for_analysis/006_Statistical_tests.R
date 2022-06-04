@@ -9,7 +9,6 @@ Total_data <- read.csv("for_statisticaltests.csv")
 #--- Log-Log model ---#
 
 model <- lm(log(Time_in_Top10) ~ 
-               #Debut_Rank + Days_2_peak + 
                averageRating + VotesIMDb + log(Prevol_tweets) + log(Pre_release_sentiment) +
                log(Postvol_tweets) + log(Post_sentiment), Total_data)
 
